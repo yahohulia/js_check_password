@@ -22,4 +22,36 @@ describe(`Function 'checkPassword':`, () => {
   it(`should return 'false' for a password that lacks numbers or sufficient length (Str@ng)`, () => {
     expect(checkPassword('Str@ng')).toBe(false);
   });
+
+  it(`should return 'false' if the password is just below the minimum length (7 characters)`, () => {
+    expect(checkPassword('P@ss123')).toBe(false);
+  });
+
+  it(`should return 'true' if the password is exactly at the minimum length boundary (8 characters)`, () => {
+    expect(checkPassword('P@ssord1')).toBe(true);
+  });
+
+  it(`should return 'false' if the password lacks an uppercase letter`, () => {
+    expect(checkPassword('p@ssword1!')).toBe(false);
+  });
+
+  it(`should return 'false' if the password lacks a lowercase letter`, () => {
+    expect(checkPassword('PASSWORD1!')).toBe(false);
+  });
+
+  it(`should return 'false' if the password lacks a digit`, () => {
+    expect(checkPassword('Password!!')).toBe(false);
+  });
+
+  it(`should return 'false' if the password lacks a special character`, () => {
+    expect(checkPassword('Password123')).toBe(false);
+  });
+
+  it(`should return 'false' if the password contains Cyrillic characters`, () => {
+    expect(checkPassword('Пароль123!')).toBe(false);
+  });
+
+  it(`should return 'false' if a valid Latin password contains even one Cyrillic letter`, () => {
+    expect(checkPassword('Pаssword1!')).toBe(false);
+  });
 });
