@@ -54,4 +54,12 @@ describe(`Function 'checkPassword':`, () => {
   it(`should return 'false' if a valid Latin password contains even one Cyrillic letter`, () => {
     expect(checkPassword('Pаssword1!')).toBe(false);
   });
+
+  it(`should return 'true' if the password is exactly at the maximum length boundary (16 characters)`, () => {
+    expect(checkPassword('P@ssword12345678')).toBe(true);
+  });
+
+  it(`should return 'false' if the password exceeds the maximum length (17 characters)`, () => {
+    expect(checkPassword('P@ssword123456789')).toBe(false);
+  });
 });
